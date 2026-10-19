@@ -126,31 +126,31 @@
    "id": "ch20",
    "no": "第20章",
    "title": "高级项目管理",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch21",
    "no": "第21章",
    "title": "项目管理科学基础",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch22",
    "no": "第22章",
    "title": "组织通用治理",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch23",
    "no": "第23章",
    "title": "组织通用管理",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch24",
    "no": "第24章",
    "title": "法律法规与标准规范",
-   "ready": false
+   "ready": true
   }
  ]
 }
