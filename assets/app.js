@@ -53,7 +53,7 @@ function renderHome(){updCount();
 /* ---------- 计划 ---------- */
 function renderPlan(){getJSON("data/plan.json").then(function(p){
   $("phaseCards").innerHTML=p.phases.map(function(f){return '<div class="sec"><h3>'+esc(f.name)+'阶段 <span class="pill">'+esc(f.range)+'</span><span class="pill">'+esc(f.daily)+'</span></h3><div class="small">'+esc(f.goal)+'</div></div>'}).join("");
-  var c=curWeek(p);var h='<tr><th>周</th><th>日期</th><th>教材章节 / 主题</th><th>练习与任务</th></tr>',last="";
+  var c=curWeek(p);var h='<tr><th>周</th><th>日期</th><th>章节 / 主题</th><th>练习与任务</th></tr>',last="";
   p.weeks.forEach(function(w){if(w.phase!==last){h+='<tr class="phase"><td colspan="4">'+esc(w.phase)+'阶段</td></tr>';last=w.phase}
     var cur=c&&c.week===w.week;
     h+='<tr'+(cur?' style="outline:2px solid var(--accent)"':'')+'><td>'+w.week+(cur?' 👈':'')+'</td><td style="white-space:nowrap">'+w.start.slice(5).replace("-","/")+'–'+w.end.slice(5).replace("-","/")+'</td><td>'+esc(w.chapters)+'</td><td class="small">'+esc(w.tasks)+'</td></tr>'});
@@ -61,7 +61,7 @@ function renderPlan(){getJSON("data/plan.json").then(function(p){
 
 /* ---------- 知识点列表 ---------- */
 function renderKP(){var done=LS.get(DKEY,{});getJSON("data/index.json").then(function(ix){
-  $("kpSrc").textContent="教材："+ix.textbook+"。已完成 "+ix.chapters.filter(function(c){return c.ready}).length+" / "+ix.chapters.length+" 个单元。";
+  $("kpSrc").textContent="章节顺序对应："+ix.textbook+"。已完成 "+ix.chapters.filter(function(c){return c.ready}).length+" / "+ix.chapters.length+" 个单元。";
   $("chList").innerHTML=ix.chapters.map(function(c){return '<a href="#kp/'+c.id+'" class="'+(c.ready?"":"dis")+'"><span class="no">'+esc(c.no)+'</span><span class="t">'+esc(c.title)+'</span>'+
     (c.ready?(done[c.id]?'<span class="pill ok">已学</span>':'<span class="pill">笔记＋自测</span>'):'<span class="pill">待补充</span>')+'</a>'}).join("")})}
 
@@ -71,12 +71,17 @@ function matrixHTML(m){var h='<div class="tablewrap"><table class="matrix"><tr><
   m.rows.forEach(function(r){var n=r.cells.reduce(function(s,c){return s+c.length},0);
     h+='<tr><td class="ka">'+esc(r.ka)+'<br><small class="muted">'+n+'个</small></td>'+r.cells.map(function(c){return '<td>'+c.map(function(p){return '<span class="p">'+esc(p)+'</span>'}).join("")+'</td>'}).join("")+'</tr>'});
   return h+'</table></div><p class="small muted">合计 49 个过程。手机上可左右滑动表格。</p>'}
+function ittoHTML(p){function L(t,a){return a&&a.length?'<div class="ir"><b>'+t+'</b>'+a.map(function(x){return '<span class="it">'+x+'</span>'}).join("")+'</div>':''}
+  return '<details class="itto"><summary><span class="pn">'+esc(p.name)+'</span>'+(p.group?'<span class="pill">'+esc(p.group)+'</span>':'')+'</summary>'+
+    (p.def?'<div class="small">'+p.def+'</div>':'')+L("输入",p.i)+L("工具与技术",p.t)+L("输出",p.o)+(p.note?'<div class="small tbd" style="margin-top:4px">★ '+p.note+'</div>':'')+'</details>'}
 function renderChapter(id){$("chBody").innerHTML='<div class="card muted">加载中…</div>';
   chapter(id).then(function(c){var done=LS.get(DKEY,{});
     var h='<div class="card"><a href="#kp" class="small">← 知识点目录</a><h1>'+esc(c.no)+' · '+esc(c.title)+'</h1><p class="muted small">'+esc(c.source)+'</p><div class="tip">'+c.intro+'</div>';
     if(c.matrix)h+='<h2>49个过程总表</h2>'+matrixHTML(c.matrix);
     c.sections.forEach(function(s){h+='<div class="sec"><h3>'+esc(s.title)+'</h3><span class="lab k">要点</span><ul>'+li(s.points)+'</ul>';
       if(s.pitfalls&&s.pitfalls.length)h+='<span class="lab e">易错点</span><ul>'+li(s.pitfalls)+'</ul>';
+      if(s.itto&&s.itto.length)h+='<span class="lab k">过程与ITTO（点开查看）</span>'+s.itto.map(ittoHTML).join("");
+      if(s.example)h+='<span class="lab x">例题（原创）</span><div class="example">'+s.example+'</div>';
       if(s.mnemonic)h+='<span class="lab m">记忆口诀</span><div class="small">'+s.mnemonic+'</div>';h+='</div>'});
     h+='<div class="btnrow"><a class="btn pri" href="#quiz/'+id+'">✏️ 本章自测（'+c.quiz.length+'题）</a>'+(c.matrix?'<a class="btn" href="#quiz/'+id+'/drill">🧩 过程组归属训练</a>':'')+'</div>';
     h+='<label class="check"><input type="checkbox" id="doneChk"'+(done[id]?" checked":"")+'> 我已学完本章</label></div>';

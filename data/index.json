@@ -30,25 +30,25 @@
    "id": "ch04",
    "no": "第4章",
    "title": "信息系统管理",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch05",
    "no": "第5章",
    "title": "信息系统工程",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch06",
    "no": "第6章",
    "title": "项目管理概论",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch07",
    "no": "第7章",
    "title": "项目立项管理",
-   "ready": false
+   "ready": true
   },
   {
    "id": "ch08",
