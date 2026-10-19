@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>软考高项备考 · 信息系统项目管理师</title>
+<meta name="theme-color" content="#0f1419">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="高项备考">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="assets/app.css?v=1">
+</head>
+<body>
+<div class="wrap">
+<div class="brand"><b>📘 软考高项备考</b><small>目标：2027年上半年</small></div>
+<nav class="topnav" id="topnav">
+  <a href="#home" data-v="home">🏠 首页</a>
+  <a href="#intro" data-v="intro">📋 考试</a>
+  <a href="#method" data-v="method">🧭 方法</a>
+  <a href="#plan" data-v="plan">📅 计划</a>
+  <a href="#kp" data-v="kp">📚 知识点</a>
+  <a href="#wrong" data-v="wrong">📕 错题</a>
+</nav>
+
+<!-- 首页 -->
+<section id="v-home" class="view">
+  <div class="card">
+    <h1>信息系统项目管理师（软考高项）</h1>
+    <p class="muted small">零基础备考站 · 内容为简体中文 · 错题记录只保存在本机浏览器</p>
+    <div class="grid2">
+      <div class="tile"><span>距 2027年5月22日（预计，<span class="tbd">待官方公布</span>）</span><div class="count" id="daysLeft">—</div><span>天</span></div>
+      <div class="tile"><span>当前计划周</span><div class="count" id="weekNow">—</div><span id="weekNowText">—</span></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <a class="tile" href="#intro"><b>📋 考试介绍</b><span>考什么、怎么考、多少分及格</span></a>
+    <a class="tile" href="#method"><b>🧭 学习方法</b><span>教材 → 章节题 → 真题 → 案例计算 → 论文</span></a>
+    <a class="tile" href="#plan"><b>📅 备考计划</b><span>2026-11 至 2027-05，逐周安排</span></a>
+    <a class="tile" href="#kp"><b>📚 知识点</b><span>49过程总表 ＋ 教材章节笔记 ＋ 自测</span></a>
+    <a class="tile" href="#kp/ch00"><b>🧩 49个过程总表</b><span>5大过程组 × 10大知识领域</span></a>
+    <a class="tile wrong" href="#wrong"><b>📕 错题本</b><span id="wrongCount">0 道错题</span></a>
+  </div>
+  <div class="card small muted" style="margin-top:12px">
+    <b style="color:var(--ink)">本周该做什么？</b>
+    <div id="thisWeek">—</div>
+  </div>
+</section>
+
+<!-- 考试介绍 -->
+<section id="v-intro" class="view" hidden>
+  <div class="card">
+    <h1>📋 考试介绍</h1>
+    <p class="muted small">资料核实日期：2026-10-19。依据中国计算机技术职业资格网（ruankao.org.cn）2026年上半年批次安排通告、北京/广东等地人事考试机构2026年报考通知等。<span class="tbd">标黄</span>的为2027年尚未正式公布的信息。</p>
+
+    <h2>一句话说清楚</h2>
+    <p>「软考」全称<b>计算机技术与软件专业技术资格（水平）考试</b>，由人力资源社会保障部、工业和信息化部组织。<b>信息系统项目管理师</b>（俗称「高项」）是其中的<b>高级</b>资格，考的是“怎么管好一个信息化项目”。报考<b>不限学历、资历、年龄</b>，零基础也可以直接报高级。</p>
+
+    <h2>考哪三科（2026年的实际安排）</h2>
+    <div class="tablewrap"><table>
+      <tr><th>科目</th><th>时间</th><th>题型</th><th>满分 / 及格</th></tr>
+      <tr><td><b>综合知识</b></td><td rowspan="2">上午 8:30–12:30<br>两科<b>连考</b>，共240分钟</td><td>75道单项选择题（历年惯例含少量英文题）</td><td>75 / 45</td></tr>
+      <tr><td><b>案例分析</b></td><td>主观简答题，含计算题（如进度网络图、挣值分析）和文字分析题；近年一般为3道大题，以当年试卷为准</td><td>75 / 45</td></tr>
+      <tr><td><b>论文</b></td><td>下午 14:30–16:30，120分钟</td><td>写1篇论文，结合你做过的项目论述某一管理领域</td><td>75 / 45</td></tr>
+    </table></div>
+    <ul class="small">
+      <li><b>机考</b>（计算机化考试）：在电脑上答题，论文也要在电脑上打字。2026年官方通告列出的可用输入法：微软拼音、极点五笔、搜狗拼音、搜狗五笔。</li>
+      <li>上午连考规则：综合知识<b>最短120分钟、最长150分钟</b>，交卷后剩余时间自动给案例分析用；考试结束前60分钟可交卷离场。</li>
+      <li>下午论文120分钟，<b>不得提前交卷离场</b>。</li>
+      <li>考前官方会提供<b>模拟练习平台</b>，用于熟悉机考环境（建议考前一定去试一次）。</li>
+      <li>论文字数：历年惯例为摘要约300字以内、正文约2000字以上，<b>以考场说明为准</b>。</li>
+    </ul>
+
+    <h2>多少分算通过</h2>
+    <div class="tip">三科<b>各自</b>满分75分，<b>每科都要 ≥ 45分</b>（满分的60%），而且必须在<b>同一次考试</b>中三科全部及格。单科成绩<b>不保留</b>到下一年——任意一科没过，下次三科都要重考。</div>
+    <p class="small muted">高项目前执行全国统一合格标准（自2022年起各科目为试卷满分的60%）。部分单独划线地区的政策以当年官方通告为准（2025年上半年通告中高级资格未单独划线）。</p>
+
+    <h2>一年考几次</h2>
+    <p>2024–2026年，高项都<b>只在上半年（5月）考一次</b>。例如2026年计划为5月23日至26日期间，高项实际分两批：5月23日（第一批）、5月24日（第二批），个人批次以准考证为准。北京地区2026年通知明确：信息系统项目管理师“今年只在上半年组织考试，下半年不再安排”。</p>
+    <div class="note">2027年：考试日期、批次<b>待官方公布</b>。多家培训机构推测为2027年5月下旬（如5月22–23日），这只是推测。官方年度安排通常在年初发布，请关注 <a href="https://www.ruankao.org.cn" target="_blank" rel="noopener">ruankao.org.cn</a> 和本省软考办通知。</div>
+
+    <h2>报名怎么报</h2>
+    <ul>
+      <li>入口：<b>中国计算机技术职业资格网</b>（www.ruankao.org.cn）→ 全国统一报名平台。需先用「国家网络身份认证」App完成实名认证和人脸识别，再扫码登录。不允许代报名。</li>
+      <li>时间：<b>各省不同</b>。2026年上半年大致在3月中旬到4月中旬，例如广东3月23日–3月31日（缴费到4月1日）、北京3月27日–4月2日。单省窗口有的只有一周，<b>一般不设补报</b>。</li>
+      <li>费用：各省定价，例如广东为每人每科73元（三科共219元）。</li>
+      <li>准考证：考前几天打印（2026年为5月19日–5月22日）。</li>
+      <li>成绩：2026年通告为考试结束之日起45日内开放查询。</li>
+      <li class="tbd">2027年的报名时间、费用、准考证打印时间：待官方公布。</li>
+    </ul>
+
+    <h2>用什么教材</h2>
+    <p>官方指定用书：<b>《信息系统项目管理师教程（第4版）》</b>，全国计算机专业技术资格考试办公室组编，清华大学出版社2023年3月出版，ISBN 9787302624318，依据2022年审定通过的考试大纲编写，共24章。截至2026年10月未见第5版或新大纲的官方消息；2027年是否改版<span class="tbd">待官方公布</span>。</p>
+    <div class="tablewrap"><table>
+      <tr><th>板块</th><th>章节</th><th>主要考在哪</th></tr>
+      <tr><td>信息技术与信息系统</td><td>第1–5章：信息化发展、信息技术发展、信息系统治理、信息系统管理、信息系统工程</td><td>综合知识</td></tr>
+      <tr><td>项目管理基础</td><td>第6–7章：项目管理概论、项目立项管理</td><td>综合知识</td></tr>
+      <tr><td><b>十大知识领域</b>（核心）</td><td>第8–17章：整合、范围、进度、成本、质量、资源、沟通、风险、采购、干系人</td><td>三科都考；案例与论文的主战场</td></tr>
+      <tr><td>项目绩效域与专题</td><td>第18–21章：项目绩效域、配置与变更管理、高级项目管理、项目管理科学基础</td><td>综合知识；第21章有计算题</td></tr>
+      <tr><td>组织与法规</td><td>第22–24章：组织通用治理、组织通用管理、法律法规与标准规范</td><td>综合知识</td></tr>
+    </table></div>
+
+    <h2>拿到证书有什么用</h2>
+    <p class="small">证书由人社部、工信部共同用印，全国范围有效。按国家规定，取得高级资格可作为聘任高级工程师职务的依据；各地还常用于人才引进、积分落户等——<b>具体以你所在单位和当地政策为准</b>。</p>
+  </div>
+</section>
+
+<!-- 学习方法 -->
+<section id="v-method" class="view" hidden>
+  <div class="card">
+    <h1>🧭 学习方法</h1>
+    <p>零基础的主线只有一条：<b>教材 → 章节题 → 真题 → 案例计算 → 论文</b>。每一步都在为下一步打基础，不要跳。</p>
+    <div class="sec"><h3>① 教材：先把骨架搭起来</h3>
+      <ul><li>先看本站「49个过程总表」，知道十大知识领域、五大过程组分别是什么，再开始读第1章。</li>
+      <li>每章读两遍：第一遍快速通读看懂大意（不划线），第二遍对照本站笔记，把“分类、顺序、定义”类内容划出来。</li>
+      <li>第8–17章（十大领域）是重中之重；第1–5章、第22–24章理解即可，不用逐字背。</li></ul></div>
+    <div class="sec"><h3>② 章节题：每读完一章马上做</h3>
+      <ul><li>每章做本站自测＋教材/题库里的章节练习题（30–50道）。</li>
+      <li>做错的题，看解析后点「再写一次」重新作答——<b>用自己的选择改正一次</b>比只看答案记得牢。</li>
+      <li>错题自动进「📕 错题本」，每周日集中清一次。</li></ul></div>
+    <div class="sec"><h3>③ 真题：从强化阶段开始</h3>
+      <ul><li>综合知识：近几年的历年真题按“一套一套”限时做（150分钟内），目标稳定在50分以上再留余量。</li>
+      <li>真题最大的价值是告诉你“哪些知识点年年考”，做完要回到教材对应位置补漏。</li>
+      <li>注意：本站的自测题都是<b>原创练习题</b>，不是真题；真题请使用正规渠道获取。</li></ul></div>
+    <div class="sec"><h3>④ 案例分析：计算 ＋ 文字两手抓</h3>
+      <ul><li><b>计算题</b>：进度网络图（关键路径、总浮动/自由浮动）、挣值分析（PV、EV、AC、CV、SV、CPI、SPI、EAC、ETC）是最常见的。公式要会推，题目要亲手算。</li>
+      <li><b>文字题</b>：常见题型是“指出案例中项目经理做法的问题”和“给出改进措施”。答题要点：<b>对照该领域的过程逐条找</b>，分条作答、一条一句。</li>
+      <li>每道案例题都按考试时间限时，写完对照参考答案找“得分点关键词”。</li></ul></div>
+    <div class="sec"><h3>⑤ 论文：提前准备一个“自己的项目”</h3>
+      <ul><li>强化阶段就要选定一个论文项目背景（真实或合理的信息化项目）：项目名称、投资金额、工期、你的角色（项目经理）、技术架构、主要难点。</li>
+      <li>论文一般结构：摘要 → 项目背景 → 按该领域的过程逐个论述（结合项目的具体做法）→ 总结（效果＋不足＋改进）。</li>
+      <li>冲刺阶段每周1篇，<b>在电脑上限时120分钟打字完成</b>（机考）；写完对照评分要点自评。</li></ul></div>
+    <div class="tip"><b>每天怎么分配？</b>基础阶段每天1–1.5小时：约60%读教材，40%做章节题。周末抽30分钟复习错题本、默写一次49过程表。</div>
+  </div>
+</section>
+
+<!-- 备考计划 -->
+<section id="v-plan" class="view" hidden>
+  <div class="card">
+    <h1>📅 备考计划（2026-11 → 2027-05）</h1>
+    <p class="muted small">按每周一到周日排期。考试日期 <span class="tbd">待官方公布</span>（预计2027年5月下旬），公布后再微调最后两周。</p>
+    <div id="phaseCards"></div>
+    <h2>逐周安排</h2>
+    <div class="tablewrap"><table id="planTable"></table></div>
+  </div>
+</section>
+
+<!-- 知识点列表 -->
+<section id="v-kp" class="view" hidden>
+  <div class="card">
+    <h1>📚 知识点</h1>
+    <p class="muted small" id="kpSrc"></p>
+    <div class="chlist" id="chList"></div>
+    <p class="disclaimer">笔记为学习整理，帮助你抓重点；措辞以教材原文为准。灰色章节将陆续补充。</p>
+  </div>
+</section>
+
+<!-- 章节笔记 -->
+<section id="v-ch" class="view" hidden><div id="chBody"></div></section>
+
+<!-- 自测 -->
+<section id="v-quiz" class="view" hidden><div id="quizBody"></div></section>
+
+<!-- 错题本 -->
+<section id="v-wrong" class="view" hidden><div id="wrongBody"></div></section>
+
+<footer>软考高项备考站 · 数据文件见 <code>data/</code> · 自测题为原创练习题，非历年真题</footer>
+</div>
+<script src="assets/app.js?v=1"></script>
+</body>
+</html>
