@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>软考高项备考 · 信息系统项目管理师</title>
-<meta name="theme-color" content="#0f1419">
+<meta name="theme-color" content="#19c8b9">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,11 +12,15 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/app.css?v=3">
+<link rel="stylesheet" href="assets/app.css?v=5">
 </head>
 <body>
 <div class="wrap">
 <div class="brand"><b>📘 软考高项备考</b><small>目标：2027年上半年</small></div>
+<div class="theme-toggle" id="themeToggle" aria-label="主题">
+  <button type="button" data-t="" class="on">☀️ 白天</button>
+  <button type="button" data-t="night">🌙 夜晚</button>
+</div>
 <nav class="topnav" id="topnav">
   <a href="#home" data-v="home">🏠 首页</a>
   <a href="#intro" data-v="intro">📋 考试</a>
@@ -44,8 +48,8 @@
     <a class="tile" href="#kp/ch00"><b>🧩 49个过程总表</b><span>5大过程组 × 10大知识领域</span></a>
     <a class="tile wrong" href="#wrong"><b>📕 错题本</b><span id="wrongCount">0 道错题</span></a>
   </div>
-  <div class="card small muted" style="margin-top:12px">
-    <b style="color:var(--ink)">本周该做什么？</b>
+  <div class="card tip-week small" style="margin-top:12px">
+    <b style="color:var(--tip-ink)">📌 本周该做什么？</b>
     <div id="thisWeek">—</div>
   </div>
 </section>
@@ -170,6 +174,6 @@
 
 <footer>软考高项备考站 · 数据文件见 <code>data/</code> · 自测题为原创练习题，非历年真题</footer>
 </div>
-<script src="assets/app.js?v=3"></script>
+<script src="assets/app.js?v=4"></script>
 </body>
 </html>

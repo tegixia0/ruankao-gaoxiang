@@ -1,0 +1,91 @@
+:root{--bg:#0f1419;--card:#1a2332;--card2:#222e42;--ink:#eef3fa;--muted:#93a3bb;--accent:#4f8cff;--ok:#2ecc71;--bad:#ff6b6b;--warn:#f0c14b;--border:#2e3f58;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:17px;line-height:1.6;
+  padding:calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));}
+.wrap{max-width:760px;margin:0 auto}
+a{color:#8fb6ff}
+h1{font-size:1.3rem;margin:4px 0 10px}
+h2{font-size:1.15rem;margin:18px 0 8px}
+h3{font-size:1.02rem;margin:14px 0 6px;color:#b8d0ff}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.brand b{font-size:1.15rem}.brand small{color:var(--muted);margin-left:auto;font-size:13px}
+.topnav{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:4px;margin-bottom:12px;position:sticky;top:calc(4px + env(safe-area-inset-top));z-index:20}
+.topnav a{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:10px;color:var(--muted);font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;text-align:center;line-height:1.2}
+.topnav a.active{background:var(--accent);color:#fff}
+@media (max-width:520px){.topnav{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.muted{color:var(--muted)}.small{font-size:14px}
+.pill{display:inline-block;background:var(--card2);border:1px solid var(--border);padding:1px 9px;border-radius:999px;font-size:12.5px;color:var(--muted);margin-right:4px}
+.pill.tbd{border-color:#7a6420;color:var(--warn);background:#2a2614}
+.pill.ok{border-color:#2f7a4f;color:#9fe8bd;background:#142a1e}
+.tbd{color:var(--warn)}
+.note{padding:10px 12px;border-radius:12px;background:#2a2614;border:1px solid #5a4a18;color:#f6dc8c;font-size:15px;margin:10px 0}
+.tip{padding:10px 12px;border-radius:12px;background:#142036;border:1px solid #2c4675;color:#c6d8ff;font-size:15px;margin:10px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.tile{display:block;padding:14px;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--ink);text-decoration:none}
+.tile b{display:block;font-size:16px}.tile span{color:var(--muted);font-size:13.5px}
+.tile.wrong{border-color:#9b3340;background:#2a1518}.tile.wrong b{color:#ffb4bc}
+.count{font-size:32px;font-weight:800;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--border);padding:7px 6px;text-align:left;vertical-align:top}
+th{color:#b8d0ff;font-weight:700;background:var(--card2)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:12px}
+.tablewrap table{min-width:560px}
+tr.phase td{background:#1d2a40;color:#fff;font-weight:800}
+.matrix td{font-size:13px;line-height:1.45}.matrix td.ka{font-weight:800;white-space:nowrap;color:#fff}
+.matrix .p{display:block;margin:2px 0;padding:2px 6px;border-radius:7px;background:#16263f}
+.matrix th small{display:block;color:var(--muted);font-weight:400}
+ul,ol{padding-left:1.4em;margin:6px 0}li{margin:3px 0}
+.sec{border-left:3px solid var(--accent);padding-left:12px;margin:14px 0}
+.lab{display:inline-block;font-size:12.5px;font-weight:800;padding:1px 8px;border-radius:8px;margin:8px 0 2px}
+.lab.k{background:#1c3156;color:#b8d0ff}.lab.e{background:#3a1a1f;color:#ffb4bc}.lab.m{background:#2e2a12;color:#f6dc8c}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border:none;border-radius:14px;font-size:16px;font-weight:700;color:#fff;background:var(--card2);text-decoration:none;cursor:pointer}
+.btn.pri{background:var(--accent)}.btn.bad{background:#9b3340}.btn.ok{background:#1f7a47}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.btnrow .btn{flex:1 1 140px}
+.chlist a{display:flex;gap:10px;align-items:center;padding:12px;border-bottom:1px solid var(--border);color:var(--ink);text-decoration:none}
+.chlist a:last-child{border-bottom:none}.chlist .no{flex:0 0 52px;color:var(--muted);font-size:13px}.chlist .t{flex:1}
+.chlist .dis{opacity:.5;pointer-events:none}
+/* quiz */
+.bar{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:15px;margin:4px 2px 8px}.bar b{color:var(--ink)}.bar .sp{flex:1}
+.progress{height:6px;background:var(--card2);border-radius:3px;overflow:hidden;margin-bottom:12px}.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.qtext{font-size:19px;font-weight:700;line-height:1.5;margin:4px 0 12px}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;min-height:52px;padding:12px;border-radius:14px;border:2px solid var(--border);background:#0b1017;color:var(--ink);font-size:16.5px;line-height:1.45;cursor:pointer;font-family:inherit}
+.opt .L{flex:0 0 auto;font-weight:800;color:var(--muted)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:#0f2a1b}
+.opt.wrongpick{border-color:var(--bad);background:#2a1518}
+.feedback{margin-top:12px;font-size:16px;line-height:1.6}
+.feedback:empty{display:none}
+.feedback .title{font-weight:800;font-size:18px}
+.feedback.ok .title{color:var(--ok)}.feedback.bad .title{color:var(--bad)}
+.feedback .exp{margin-top:6px;padding:8px 10px;border-radius:10px;background:#2a2a1a;color:var(--warn);font-size:15px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:10}
+.actions .btn{min-height:54px;font-size:17px;box-shadow:0 -6px 18px rgba(0,0,0,.35)}
+.actions .full{grid-column:1/-1}
+.disclaimer{font-size:13px;color:var(--muted);margin-top:10px}
+.wl{list-style:none;padding:0;margin:8px 0}.wl li{border-bottom:1px solid var(--border);padding:8px 0;font-size:15px}.wl .n{color:var(--bad);font-weight:800}.wl .src{color:var(--muted);font-size:12.5px}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:20px}
+.check{display:flex;align-items:center;gap:8px;font-size:15px;margin-top:10px}
+.check input{width:22px;height:22px}
+
+.lab.x{background:#163a2a;color:#9fe8bd}
+.example{padding:10px 12px;border-radius:12px;background:#0f2219;border:1px solid #2f7a4f;font-size:15px;line-height:1.65;overflow-x:auto}
+.example table{min-width:0;font-size:14px;margin:6px 0}.example td,.example th{padding:4px 6px}
+details.itto{border:1px solid var(--border);border-radius:12px;background:#151f2e;margin:6px 0;padding:0 10px}
+details.itto summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;font-weight:700}
+details.itto summary::-webkit-details-marker{display:none}
+details.itto summary::before{content:"▸";color:var(--muted)}details.itto[open] summary::before{content:"▾"}
+details.itto .pn{flex:1}details.itto[open]{padding-bottom:10px}
+.ir{margin-top:6px;font-size:14px}.ir b{display:inline-block;min-width:5.5em;color:#b8d0ff}
+.it{display:inline-block;margin:2px 4px 2px 0;padding:1px 8px;border-radius:8px;background:#1d2a40;font-size:13.5px}
+.formula{font-family:ui-monospace,Menlo,Consolas,monospace;background:#0b1017;border:1px solid var(--border);border-radius:8px;padding:1px 6px;white-space:nowrap}
+
+/* 「举例」生活化小例子 —— 暖色提示，区别于绿色例题计算块；可单独回退 */
+.eg{margin:6px 0 2px;padding:8px 10px 8px 12px;border-radius:10px;background:#2a1f0f;border:1px solid #8a6a2f;border-left:3px solid #e0a84a;color:#f0d9a0;font-size:14.5px;line-height:1.55}
+.eg-lab{display:inline-block;margin:0 6px 0 0;padding:1px 7px;border-radius:6px;background:#5a4018;color:#ffd98a;font-size:12px;font-weight:700;letter-spacing:.04em;vertical-align:baseline}
+details.itto .eg{margin-top:8px}

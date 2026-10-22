@@ -66,14 +66,17 @@ function renderKP(){var done=LS.get(DKEY,{});getJSON("data/index.json").then(fun
     (c.ready?(done[c.id]?'<span class="pill ok">已学</span>':'<span class="pill">笔记＋自测</span>'):'<span class="pill">待补充</span>')+'</a>'}).join("")})}
 
 /* ---------- 章节 ---------- */
-function li(a){return a.map(function(x){return "<li>"+x+"</li>"}).join("")}
+function li(a){return a.map(function(x){if(typeof x==="string")return "<li>"+x+"</li>";
+  var h="<li>"+(x.t||x.text||"");
+  if(x.eg)h+='<div class="eg"><span class="eg-lab">举例</span>'+x.eg+"</div>";
+  return h+"</li>"}).join("")}
 function matrixHTML(m){var h='<div class="tablewrap"><table class="matrix"><tr><th>知识领域</th>'+m.groups.map(function(g,i){return '<th>'+g+'过程组<small>'+m.colCounts[i]+'个</small></th>'}).join("")+'</tr>';
   m.rows.forEach(function(r){var n=r.cells.reduce(function(s,c){return s+c.length},0);
     h+='<tr><td class="ka">'+esc(r.ka)+'<br><small class="muted">'+n+'个</small></td>'+r.cells.map(function(c){return '<td>'+c.map(function(p){return '<span class="p">'+esc(p)+'</span>'}).join("")+'</td>'}).join("")+'</tr>'});
   return h+'</table></div><p class="small muted">合计 49 个过程。手机上可左右滑动表格。</p>'}
 function ittoHTML(p){function L(t,a){return a&&a.length?'<div class="ir"><b>'+t+'</b>'+a.map(function(x){return '<span class="it">'+x+'</span>'}).join("")+'</div>':''}
   return '<details class="itto"><summary><span class="pn">'+esc(p.name)+'</span>'+(p.group?'<span class="pill">'+esc(p.group)+'</span>':'')+'</summary>'+
-    (p.def?'<div class="small">'+p.def+'</div>':'')+L("输入",p.i)+L("工具与技术",p.t)+L("输出",p.o)+(p.note?'<div class="small tbd" style="margin-top:4px">★ '+p.note+'</div>':'')+'</details>'}
+    (p.def?'<div class="small">'+p.def+'</div>':'')+L("输入",p.i)+L("工具与技术",p.t)+L("输出",p.o)+(p.note?'<div class="small tbd" style="margin-top:4px">★ '+p.note+'</div>':'')+(p.eg?'<div class="eg"><span class="eg-lab">举例</span>'+p.eg+'</div>':'')+'</details>'}
 function renderChapter(id){$("chBody").innerHTML='<div class="card muted">加载中…</div>';
   chapter(id).then(function(c){var done=LS.get(DKEY,{});
     var h='<div class="card"><a href="#kp" class="small">← 知识点目录</a><h1>'+esc(c.no)+' · '+esc(c.title)+'</h1><p class="muted small">'+esc(c.source)+'</p><div class="tip">'+c.intro+'</div>';
@@ -144,4 +147,26 @@ function renderWrong(arg){var w=wrongs(),keys=Object.keys(w).sort(function(a,b){
   var cb=$("clrB");if(cb)cb.onclick=function(){if(confirm("确定清空全部错题记录？")){LS.set(WKEY,{});renderWrong()}}}
 
 route();
+})();
+
+/* theme: light default, optional night */
+(function(){
+  var KEY="ruankao.theme";
+  function apply(t){
+    if(t==="night") document.documentElement.setAttribute("data-theme","night");
+    else document.documentElement.removeAttribute("data-theme");
+    try{localStorage.setItem(KEY,t||"")}catch(e){}
+    var bar=document.getElementById("themeToggle");
+    if(!bar) return;
+    [].forEach.call(bar.querySelectorAll("button"),function(b){
+      b.classList.toggle("on",(b.getAttribute("data-t")||"")===(t||""));
+    });
+  }
+  var saved=""; try{saved=localStorage.getItem(KEY)||""}catch(e){}
+  apply(saved==="night"?"night":"");
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest("#themeToggle button");
+    if(!b) return;
+    apply(b.getAttribute("data-t")||"");
+  });
 })();
