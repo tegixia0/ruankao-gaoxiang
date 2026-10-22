@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>软考高项备考 · 信息系统项目管理师</title>
-<meta name="theme-color" content="#19c8b9">
+<meta name="theme-color" content="#0f1419">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,14 +12,14 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/app.css?v=5">
+<link rel="stylesheet" href="assets/app.css?v=7">
 </head>
 <body>
 <div class="wrap">
 <div class="brand"><b>📘 软考高项备考</b><small>目标：2027年上半年</small></div>
 <div class="theme-toggle" id="themeToggle" aria-label="主题">
-  <button type="button" data-t="" class="on">☀️ 白天</button>
-  <button type="button" data-t="night">🌙 夜晚</button>
+  <button type="button" data-t="" class="on">🌙 夜晚</button>
+  <button type="button" data-t="day">☀️ 白天</button>
 </div>
 <nav class="topnav" id="topnav">
   <a href="#home" data-v="home">🏠 首页</a>
@@ -46,6 +46,9 @@
     <a class="tile" href="#plan"><b>📅 备考计划</b><span>2026-11 至 2027-05，逐周安排</span></a>
     <a class="tile" href="#kp"><b>📚 知识点</b><span>49过程总表 ＋ 24章笔记 ＋ 自测</span></a>
     <a class="tile" href="#kp/ch00"><b>🧩 49个过程总表</b><span>5大过程组 × 10大知识领域</span></a>
+    <a class="tile" href="#flash/ch00"><b>🃏 练一练 · 闪卡</b><span>49过程 + 核心公式，点翻自评</span></a>
+    <a class="tile" href="#match/ch00"><b>🔗 练一练 · 匹配</b><span>过程↔知识领域，点选配对</span></a>
+    <a class="tile" href="#blank/ch00"><b>✍️ 练一练 · 填空</b><span>EVM / 进度 / 渠道公式</span></a>
     <a class="tile wrong" href="#wrong"><b>📕 错题本</b><span id="wrongCount">0 道错题</span></a>
   </div>
   <div class="card tip-week small" style="margin-top:12px">
@@ -169,11 +172,14 @@
 <!-- 自测 -->
 <section id="v-quiz" class="view" hidden><div id="quizBody"></div></section>
 
+<!-- 闪卡 / 匹配 / 填空壳 -->
+<section id="v-practice" class="view" hidden><div id="practiceBody"></div></section>
+
 <!-- 错题本 -->
 <section id="v-wrong" class="view" hidden><div id="wrongBody"></div></section>
 
 <footer>软考高项备考站 · 数据文件见 <code>data/</code> · 自测题为原创练习题，非历年真题</footer>
 </div>
-<script src="assets/app.js?v=4"></script>
+<script src="assets/app.js?v=6"></script>
 </body>
 </html>

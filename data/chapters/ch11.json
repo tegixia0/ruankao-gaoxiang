@@ -285,5 +285,127 @@
    "answer": 1,
    "explain": "SPI>1进度超前；CPI<1成本超支。"
   }
+ ],
+ "flash": [
+  {
+   "id": "f:sv",
+   "front": "进度偏差 SV、进度绩效指数 SPI？",
+   "back": "SV = EV − PV\nSPI = EV / PV"
+  },
+  {
+   "id": "f:cv",
+   "front": "成本偏差 CV、成本绩效指数 CPI？",
+   "back": "CV = EV − AC\nCPI = EV / AC"
+  },
+  {
+   "id": "f:eac",
+   "front": "典型 EAC（按当前CPI）怎么算？",
+   "back": "EAC = BAC / CPI\n（非典型：EAC = AC + (BAC − EV)）"
+  },
+  {
+   "id": "f:etc",
+   "front": "ETC（尚需估算）怎么算？",
+   "back": "ETC = EAC − AC"
+  },
+  {
+   "id": "f:tcpi",
+   "front": "TCPI（完工尚需绩效指数）按BAC？",
+   "back": "TCPI = (BAC − EV) / (BAC − AC)"
+  },
+  {
+   "id": "f:spi",
+   "front": "SPI 与 SV 公式？",
+   "back": "SV = EV − PV；SPI = EV / PV"
+  },
+  {
+   "id": "f:cpi2",
+   "front": "CPI 与 CV 公式？",
+   "back": "CV = EV − AC；CPI = EV / AC"
+  }
+ ],
+ "match": [
+  {
+   "q": "SV",
+   "a": "EV − PV"
+  },
+  {
+   "q": "CV",
+   "a": "EV − AC"
+  },
+  {
+   "q": "SPI",
+   "a": "EV / PV"
+  },
+  {
+   "q": "CPI",
+   "a": "EV / AC"
+  },
+  {
+   "q": "EAC（典型）",
+   "a": "BAC / CPI"
+  },
+  {
+   "q": "TCPI（按BAC）",
+   "a": "(BAC−EV)/(BAC−AC)"
+  }
+ ],
+ "blank": [
+  {
+   "answer": "PV",
+   "accept": [
+    "PV",
+    "pv",
+    "计划价值"
+   ],
+   "explain": "进度偏差 SV = EV − PV。SV<0 表示进度落后。",
+   "eg": "该干完100万的活只干了80万，SV=−20万。",
+   "q": "SV = EV − ____"
+  },
+  {
+   "answer": "AC",
+   "accept": [
+    "AC",
+    "ac",
+    "实际成本"
+   ],
+   "explain": "成本偏差 CV = EV − AC。CV<0 表示超支。",
+   "q": "CV = EV − ____"
+  },
+  {
+   "answer": "PV",
+   "accept": [
+    "PV",
+    "pv"
+   ],
+   "explain": "SPI = EV/PV。SPI<1 进度落后。",
+   "q": "SPI = EV / ____"
+  },
+  {
+   "answer": "AC",
+   "accept": [
+    "AC",
+    "ac"
+   ],
+   "explain": "CPI = EV/AC。CPI<1 成本超支。",
+   "q": "CPI = EV / ____"
+  },
+  {
+   "answer": "CPI",
+   "accept": [
+    "CPI",
+    "cpi"
+   ],
+   "explain": "若当前效率持续，EAC = BAC/CPI。",
+   "q": "典型 EAC = BAC / ____"
+  },
+  {
+   "answer": "AC",
+   "accept": [
+    "AC",
+    "ac"
+   ],
+   "explain": "还剩工作 / 还剩预算。",
+   "q": "TCPI（按BAC）= (BAC − EV) / (BAC − ____)"
+  }
  ]
 }
