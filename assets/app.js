@@ -72,17 +72,39 @@ function li(a){return a.map(function(x){if(typeof x==="string")return "<li>"+x+"
   var h="<li>"+(x.t||x.text||"");
   if(x.eg)h+='<div class="eg"><span class="eg-lab">举例</span>'+x.eg+"</div>";
   return h+"</li>"}).join("")}
-function matrixHTML(m){var h='<div class="tablewrap"><table class="matrix"><tr><th>知识领域</th>'+m.groups.map(function(g,i){return '<th>'+g+'过程组<small>'+m.colCounts[i]+'个</small></th>'}).join("")+'</tr>';
-  m.rows.forEach(function(r){var n=r.cells.reduce(function(s,c){return s+c.length},0);
-    h+='<tr><td class="ka">'+esc(r.ka)+'<br><small class="muted">'+n+'个</small></td>'+r.cells.map(function(c){return '<td>'+c.map(function(p){return '<span class="p">'+esc(p)+'</span>'}).join("")+'</td>'}).join("")+'</tr>'});
-  return h+'</table></div><p class="small muted">合计 49 个过程。手机上可左右滑动表格。</p>'}
+function procInfo(c,name){return (c.processes&&c.processes[name])||null}
+function procDetailHTML(c,name,ka,gi){
+  var g=c.matrix.groups[gi], info=procInfo(c,name)||{};
+  var h='<div class="proc-detail" id="procDetail" data-p="'+esc(name)+'">';
+  h+='<div class="proc-detail-hd"><b>'+esc(name)+'</b><span class="pill">'+esc(ka)+'</span><span class="pill">'+esc(g)+'过程组</span>';
+  h+='<button type="button" class="proc-close" id="procClose" aria-label="关闭">×</button></div>';
+  h+='<div class="proc-row"><span class="proc-lab">一句话</span><div>'+esc(info.do||"暂无说明")+'</div></div>';
+  h+='<div class="proc-row"><span class="proc-lab">为啥这领域</span><div>'+esc(info.whyKa||"")+'</div></div>';
+  h+='<div class="proc-row"><span class="proc-lab">为啥这过程组</span><div>'+esc(info.whyGroup||"")+'</div></div>';
+  if(info.trap)h+='<div class="proc-trap"><span class="proc-lab">⚠ 易混</span><div>'+esc(info.trap)+'</div></div>';
+  h+='</div>';
+  return h}
+function matrixHTML(c){var m=c.matrix;var h='<p class="small muted">点击过程名，查看「做什么 / 为啥这领域 / 为啥这过程组」。</p>';
+  h+='<div class="tablewrap"><table class="matrix"><tr><th>知识领域</th>'+m.groups.map(function(g,i){return '<th>'+g+'过程组<small>'+m.colCounts[i]+'个</small></th>'}).join("")+'</tr>';
+  m.rows.forEach(function(r){var n=r.cells.reduce(function(s,cell){return s+cell.length},0);
+    h+='<tr><td class="ka">'+esc(r.ka)+'<br><small class="muted">'+n+'个</small></td>'+r.cells.map(function(cell,gi){return '<td>'+cell.map(function(p){
+      var trap=procInfo(c,p)&&procInfo(c,p).trap?' trap':'';
+      return '<button type="button" class="p'+trap+'" data-p="'+esc(p)+'" data-ka="'+esc(r.ka)+'" data-gi="'+gi+'">'+esc(p)+(trap?' ⚠':'')+'</button>'}).join("")+'</td>'}).join("")+'</tr>'});
+  return h+'</table></div><div id="procSlot"><p class="small muted">合计 49 个过程。点上方任一过程名展开说明。</p></div>'}
+function bindMatrixDetail(c){var root=$("chBody");if(!root)return;
+  root.querySelectorAll(".matrix .p").forEach(function(btn){
+    btn.onclick=function(){var name=btn.getAttribute("data-p"),ka=btn.getAttribute("data-ka"),gi=+btn.getAttribute("data-gi");
+      root.querySelectorAll(".matrix .p.on").forEach(function(x){x.classList.remove("on")});
+      btn.classList.add("on");
+      var slot=$("procSlot");if(slot){slot.innerHTML=procDetailHTML(c,name,ka,gi);var cl=$("procClose");if(cl)cl.onclick=function(){btn.classList.remove("on");slot.innerHTML='<p class="small muted">合计 49 个过程。点上方任一过程名展开说明。</p>'};slot.scrollIntoView({behavior:"smooth",block:"nearest"})}}})
+}
 function ittoHTML(p){function L(t,a){return a&&a.length?'<div class="ir"><b>'+t+'</b>'+a.map(function(x){return '<span class="it">'+x+'</span>'}).join("")+'</div>':''}
   return '<details class="itto"><summary><span class="pn">'+esc(p.name)+'</span>'+(p.group?'<span class="pill">'+esc(p.group)+'</span>':'')+'</summary>'+
     (p.def?'<div class="small">'+p.def+'</div>':'')+L("输入",p.i)+L("工具与技术",p.t)+L("输出",p.o)+(p.note?'<div class="small tbd" style="margin-top:4px">★ '+p.note+'</div>':'')+(p.eg?'<div class="eg"><span class="eg-lab">举例</span>'+p.eg+'</div>':'')+'</details>'}
 function renderChapter(id){$("chBody").innerHTML='<div class="card muted">加载中…</div>';
   chapter(id).then(function(c){var done=LS.get(DKEY,{});
     var h='<div class="card"><a href="#kp" class="small">← 知识点目录</a><h1>'+esc(c.no)+' · '+esc(c.title)+'</h1><p class="muted small">'+esc(c.source)+'</p><div class="tip">'+c.intro+'</div>';
-    if(c.matrix)h+='<h2>49个过程总表</h2>'+matrixHTML(c.matrix);
+    if(c.matrix)h+='<h2>49个过程总表</h2>'+matrixHTML(c);
     c.sections.forEach(function(s){h+='<div class="sec"><h3>'+esc(s.title)+'</h3><span class="lab k">要点</span><ul>'+li(s.points)+'</ul>';
       if(s.pitfalls&&s.pitfalls.length)h+='<span class="lab e">易错点</span><ul>'+li(s.pitfalls)+'</ul>';
       if(s.itto&&s.itto.length)h+='<span class="lab k">过程与ITTO（点开查看）</span>'+s.itto.map(ittoHTML).join("");
@@ -92,18 +114,26 @@ function renderChapter(id){$("chBody").innerHTML='<div class="card muted">加载
       ((c.flash&&c.flash.length)?'<a class="btn" href="#flash/'+id+'">🃏 闪卡（'+c.flash.length+'）</a>':'')+((c.match&&c.match.length)?'<a class="btn" href="#match/'+id+'">🔗 匹配（'+c.match.length+'）</a>':'')+((c.blank&&c.blank.length)?'<a class="btn" href="#blank/'+id+'">✍️ 填空（'+c.blank.length+'）</a>':'')+'</div>';
     h+='<label class="check"><input type="checkbox" id="doneChk"'+(done[id]?" checked":"")+'> 我已学完本章</label></div>';
     $("chBody").innerHTML=h;
+    if(c.matrix)bindMatrixDetail(c);
     $("doneChk").onchange=function(){var d=LS.get(DKEY,{});if(this.checked)d[id]=1;else delete d[id];LS.set(DKEY,d)}})
   .catch(function(){$("chBody").innerHTML='<div class="card">这一章还没有内容。<a href="#kp">返回目录</a></div>'})}
 
 /* ---------- 自测引擎（单选；答错后可「再写一次」；错题进错题本） ---------- */
 var Q=null;
 function itemsFromChapter(c){return c.quiz.map(function(q){return{key:c.id+":"+hash(strip(q.q)),src:c.no+" "+c.title,q:q.q,options:q.options,answer:q.answer,explain:q.explain}})}
+function drillExplain(c,x){var info=procInfo(c,x.p)||{};var g=c.matrix.groups[x.g];
+  var parts=["「"+x.p+"」→ "+x.ka+" · "+g+"过程组。"];
+  if(info.do)parts.push("做什么："+info.do);
+  if(info.whyKa)parts.push("为啥这领域："+info.whyKa);
+  if(info.whyGroup)parts.push("为啥这过程组："+info.whyGroup);
+  if(info.trap)parts.push("⚠ "+info.trap);
+  return parts.join("<br>")}
 function drillItems(c,n){var all=[];c.matrix.rows.forEach(function(r){r.cells.forEach(function(cell,gi){cell.forEach(function(p){all.push({p:p,g:gi,ka:r.ka})})})});
   var kas=c.matrix.rows.map(function(r){return r.ka});
   return shuffle(all).slice(0,n).map(function(x,i){
-    if(i%2===0)return{key:"ch00drill:"+x.p+":g",src:"49过程训练",q:"「"+x.p+"」属于哪个<b>过程组</b>？",options:c.matrix.groups.map(function(g){return g+"过程组"}),answer:x.g,explain:"「"+x.p+"」是"+x.ka+"中的"+c.matrix.groups[x.g]+"过程。",fixed:true};
+    if(i%2===0)return{key:"ch00drill:"+x.p+":g",src:"49过程训练",q:"「"+x.p+"」属于哪个<b>过程组</b>？",options:c.matrix.groups.map(function(g){return g+"过程组"}),answer:x.g,explain:drillExplain(c,x),fixed:true};
     var opts=shuffle(kas.filter(function(k){return k!==x.ka})).slice(0,3).concat([x.ka]);opts=shuffle(opts);
-    return{key:"ch00drill:"+x.p+":k",src:"49过程训练",q:"「"+x.p+"」属于哪个<b>知识领域</b>？",options:opts,answer:opts.indexOf(x.ka),explain:"「"+x.p+"」属于"+x.ka+"（"+c.matrix.groups[x.g]+"过程组）。",fixed:true}})}
+    return{key:"ch00drill:"+x.p+":k",src:"49过程训练",q:"「"+x.p+"」属于哪个<b>知识领域</b>？",options:opts,answer:opts.indexOf(x.ka),explain:drillExplain(c,x),fixed:true}})}
 function startQuiz(id,mode){$("quizBody").innerHTML='<div class="card muted">加载中…</div>';
   chapter(id).then(function(c){var items=mode==="drill"?drillItems(c,12):shuffle(itemsFromChapter(c));
     runQuiz({title:mode==="drill"?"🧩 过程组归属训练":"✏️ "+c.no+" 自测",items:items,back:"#kp/"+id,again:"#quiz/"+id+(mode?"/"+mode:""),wrongMode:false})})}
