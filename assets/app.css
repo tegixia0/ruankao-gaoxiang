@@ -226,3 +226,5 @@ details.itto .eg{margin-top:8px}
 .blank-in.bad{border-color:var(--bad);background:var(--tile-wrong-bg);animation:shake .35s ease}
 
 .practice-shell .mode-tag{margin-bottom:8px}
+
+.qtag{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--it-bg);color:var(--accent);border:1px solid var(--border)}

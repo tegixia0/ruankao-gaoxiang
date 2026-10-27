@@ -120,7 +120,7 @@ function renderChapter(id){$("chBody").innerHTML='<div class="card muted">加载
 
 /* ---------- 自测引擎（单选；答错后可「再写一次」；错题进错题本） ---------- */
 var Q=null;
-function itemsFromChapter(c){return c.quiz.map(function(q){return{key:c.id+":"+hash(strip(q.q)),src:c.no+" "+c.title,q:q.q,options:q.options,answer:q.answer,explain:q.explain}})}
+function itemsFromChapter(c){return c.quiz.map(function(q){return{key:c.id+":"+hash(strip(q.q)),src:c.no+" "+c.title,q:q.q,options:q.options,answer:q.answer,explain:q.explain,kind:q.kind||"原创练习题",source:q.source||q.kind||"原创练习题"}})}
 function drillExplain(c,x){var info=procInfo(c,x.p)||{};var g=c.matrix.groups[x.g];
   var parts=["「"+x.p+"」→ "+x.ka+" · "+g+"过程组。"];
   if(info.do)parts.push("做什么："+info.do);
@@ -143,7 +143,7 @@ function renderQ(){var c=Q.cfg,it=c.items[Q.i];if(!it){return renderEnd()}
   Q.order=order;Q.answered=false;
   var h='<div class="bar"><b>'+esc(c.title)+'</b><span class="sp"></span><span>'+(Q.i+1)+' / '+c.items.length+'</span>'+(Q.retry?'<span class="pill tbd">再写一次</span>':'')+'</div>'+
     '<div class="progress"><i style="width:'+(Q.i/c.items.length*100)+'%"></i></div><div class="card">'+
-    '<div class="small muted">'+esc(it.src)+' · 单选题（原创练习题）</div><div class="qtext">'+it.q+'</div><div class="opts" id="opts">'+
+    '<div class="small muted">'+esc(it.src)+' · 单选题 · <span class="qtag">'+esc(it.source||it.kind||"原创练习题")+'</span></div><div class="qtext">'+it.q+'</div><div class="opts" id="opts">'+
     order.map(function(oi,k){return '<button type="button" class="opt" data-oi="'+oi+'"><span class="L">'+"ABCDE"[k]+'</span><span>'+it.options[oi]+'</span></button>'}).join("")+
     '</div><div class="feedback" id="fb"></div><div class="actions" id="acts"><a class="btn full" href="'+c.back+'">退出</a></div></div>';
   $("quizBody").innerHTML=h;
