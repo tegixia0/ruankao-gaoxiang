@@ -232,8 +232,8 @@ function startFlash(c,id,deck){
     var eg=card.eg?'<div class="eg"><span class="eg-lab">举例</span>'+card.eg+'</div>':'';
     $("pracMain").innerHTML=
       '<div class="flip-wrap"><button type="button" class="flip" aria-pressed="false" id="flipCard">'+
-      '<span class="flip-inner"><span class="flip-face front"><span class="hint">点卡片看答案</span><span>'+esc(card.front)+'</span></span>'+
-      '<span class="flip-face back"><span class="hint">答案</span><span style="white-space:pre-wrap">'+esc(card.back)+'</span>'+eg+'</span></span></button></div>'+
+      '<span class="flip-inner"><span class="flip-face front"><span class="hint">点卡片看答案</span><span class="flip-text">'+esc(card.front)+'</span></span>'+
+      '<span class="flip-face back"><span class="hint">答案</span><span class="flip-text">'+esc(card.back)+'</span>'+eg+'</span></span></button></div>'+
       '<div class="flip-actions" id="flipActs" hidden><button type="button" class="btn ok" id="knowB">记住了</button><button type="button" class="btn bad" id="againWeak">再练</button></div>';
     var flip=$("flipCard");
     flip.onclick=function(){
@@ -264,10 +264,14 @@ function startMatch(c,id,deck){
     doneRounds++;
     setProg((doneRounds-1)/Math.max(1,totalRounds)*100);
     $("pracMeta").textContent="本轮 "+batch.length+" 对 · 剩余 "+pool.length;
-    var left=shuffle(batch.map(function(x,i){return {i:i,t:x.q}}));
+    // Prefer rounds without duplicate answer text (same KA for many processes used to mark正确配对 as wrong).
+    var seenA={}, uniq=[];
+    batch.forEach(function(x){ var k=normAns(x.a); if(!seenA[k]){ seenA[k]=1; uniq.push(x);} });
+    if(uniq.length>=2) batch=uniq.slice(0,roundSize);
+    var left=shuffle(batch.map(function(x,i){return {i:i,t:x.q,a:x.a}}));
     var right=shuffle(batch.map(function(x,i){return {i:i,t:x.a}}));
-    var html='<div class="match-board"><div class="match-q">'+left.map(function(x){return '<button type="button" class="chip" data-side="q" data-i="'+x.i+'">'+esc(x.t)+'</button>'}).join("")+
-      '</div><div class="match-a">'+right.map(function(x){return '<button type="button" class="chip" data-side="a" data-i="'+x.i+'">'+esc(x.t)+'</button>'}).join("")+'</div></div>'+
+    var html='<div class="match-board"><div class="match-q">'+left.map(function(x){return '<button type="button" class="chip" data-side="q" data-i="'+x.i+'" data-a="'+esc(x.a)+'">'+esc(x.t)+'</button>'}).join("")+
+      '</div><div class="match-a">'+right.map(function(x){return '<button type="button" class="chip" data-side="a" data-i="'+x.i+'" data-a="'+esc(x.t)+'">'+esc(x.t)+'</button>'}).join("")+'</div></div>'+
       '<div class="feedback" id="matchFb"></div>';
     $("pracMain").innerHTML=html;
     var sel=null, remain=batch.length;
@@ -279,7 +283,8 @@ function startMatch(c,id,deck){
         sel.classList.remove("sel"); chip.classList.add("sel"); sel=chip; return}
       var a=sel,b=chip; sel=null;
       $("pracMain").querySelectorAll(".chip.sel").forEach(function(x){x.classList.remove("sel")});
-      var ok=a.getAttribute("data-i")===b.getAttribute("data-i");
+      // Accept same index OR same answer text (duplicate labels no longer punish正确配对)
+      var ok=a.getAttribute("data-i")===b.getAttribute("data-i") || normAns(a.getAttribute("data-a"))===normAns(b.getAttribute("data-a"));
       var fb=$("matchFb");
       if(ok){
         a.classList.add("ok"); b.classList.add("ok"); a.disabled=true; b.disabled=true;

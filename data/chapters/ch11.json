@@ -499,69 +499,147 @@
       "explain": "【原创练习题】SPI>1进度超前；CPI<1成本超支。",
       "kind": "原创练习题",
       "source": "原创练习题"
+    },
+    {
+      "q": "SPI=1.1 表示？",
+      "options": [
+        "进度落后",
+        "进度超前",
+        "成本超支",
+        "范围蔓延"
+      ],
+      "answer": 1,
+      "explain": "【原创练习题】>1超前。",
+      "kind": "原创练习题",
+      "source": "原创练习题"
+    },
+    {
+      "q": "CPI=0.8 表示？",
+      "options": [
+        "成本节约",
+        "成本超支",
+        "进度超前",
+        "无偏差"
+      ],
+      "answer": 1,
+      "explain": "【原创练习题】<1超支。",
+      "kind": "原创练习题",
+      "source": "原创练习题"
+    },
+    {
+      "q": "典型 EAC 公式？",
+      "options": [
+        "AC+BAC",
+        "BAC/CPI",
+        "EV−AC",
+        "PV/SPI"
+      ],
+      "answer": 1,
+      "explain": "【原创练习题】BAC/CPI。",
+      "kind": "原创练习题",
+      "source": "原创练习题"
+    },
+    {
+      "q": "管理储备主要用于？",
+      "options": [
+        "已知风险应对",
+        "未知-未知",
+        "只发奖金",
+        "买办公零食"
+      ],
+      "answer": 1,
+      "explain": "【原创练习题】未知未知。",
+      "kind": "原创练习题",
+      "source": "原创练习题"
+    },
+    {
+      "q": "EV 的含义？",
+      "options": [
+        "计划价值",
+        "实际成本",
+        "挣值（完成工作的预算）",
+        "完工尚需绩效"
+      ],
+      "answer": 2,
+      "explain": "【原创练习题】挣值。",
+      "kind": "原创练习题",
+      "source": "原创练习题"
     }
   ],
   "flash": [
     {
-      "id": "f:sv",
-      "front": "进度偏差 SV、进度绩效指数 SPI？",
-      "back": "SV = EV − PV\nSPI = EV / PV"
+      "id": "f:sv-spi",
+      "front": "SV 与 SPI 怎么算？含义？",
+      "back": "SV=EV−PV；SPI=EV/PV\n>0 或 >1：进度超前"
     },
     {
-      "id": "f:cv",
-      "front": "成本偏差 CV、成本绩效指数 CPI？",
-      "back": "CV = EV − AC\nCPI = EV / AC"
+      "id": "f:cv-cpi",
+      "front": "CV 与 CPI 怎么算？含义？",
+      "back": "CV=EV−AC；CPI=EV/AC\n>0 或 >1：成本节约"
     },
     {
-      "id": "f:eac",
-      "front": "典型 EAC（按当前CPI）怎么算？",
-      "back": "EAC = BAC / CPI\n（非典型：EAC = AC + (BAC − EV)）"
+      "id": "f:eac2",
+      "front": "典型 EAC（CPI 持续）？",
+      "back": "EAC=BAC/CPI"
     },
     {
-      "id": "f:etc",
-      "front": "ETC（尚需估算）怎么算？",
-      "back": "ETC = EAC − AC"
+      "id": "f:eac-atyp",
+      "front": "非典型 EAC（问题已修正）？",
+      "back": "EAC=AC+(BAC−EV)"
     },
     {
-      "id": "f:tcpi",
-      "front": "TCPI（完工尚需绩效指数）按BAC？",
-      "back": "TCPI = (BAC − EV) / (BAC − AC)"
+      "id": "f:etc2",
+      "front": "ETC 公式？",
+      "back": "ETC=EAC−AC"
     },
     {
-      "id": "f:spi",
-      "front": "SPI 与 SV 公式？",
-      "back": "SV = EV − PV；SPI = EV / PV"
+      "id": "f:tcpi2",
+      "front": "按 BAC 的 TCPI？",
+      "back": "TCPI=(BAC−EV)/(BAC−AC)"
     },
     {
-      "id": "f:cpi2",
-      "front": "CPI 与 CV 公式？",
-      "back": "CV = EV − AC；CPI = EV / AC"
+      "id": "f:reserve",
+      "front": "应急储备 vs 管理储备？",
+      "back": "应急储备：已知-未知，在基准内；管理储备：未知-未知，常在预算内、基准外"
+    },
+    {
+      "id": "f:bac",
+      "front": "BAC 是什么？",
+      "back": "完工预算（Budget at Completion）"
     }
   ],
   "match": [
     {
       "q": "SV",
-      "a": "EV − PV"
+      "a": "EV−PV"
     },
     {
       "q": "CV",
-      "a": "EV − AC"
+      "a": "EV−AC"
     },
     {
       "q": "SPI",
-      "a": "EV / PV"
+      "a": "EV/PV"
     },
     {
       "q": "CPI",
-      "a": "EV / AC"
+      "a": "EV/AC"
     },
     {
       "q": "EAC（典型）",
-      "a": "BAC / CPI"
+      "a": "BAC/CPI"
     },
     {
-      "q": "TCPI（按BAC）",
-      "a": "(BAC−EV)/(BAC−AC)"
+      "q": "ETC",
+      "a": "EAC−AC"
+    },
+    {
+      "q": "应急储备",
+      "a": "已知-未知"
+    },
+    {
+      "q": "管理储备",
+      "a": "未知-未知"
     }
   ],
   "blank": [
@@ -621,6 +699,113 @@
       ],
       "explain": "还剩工作 / 还剩预算。",
       "q": "TCPI（按BAC）= (BAC − EV) / (BAC − ____)"
+    },
+    {
+      "q": "SV = EV − ____。",
+      "answer": "PV",
+      "accept": [
+        "PV",
+        "pv",
+        "计划价值"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "CV = EV − ____。",
+      "answer": "AC",
+      "accept": [
+        "AC",
+        "ac",
+        "实际成本"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "SPI = EV / ____。",
+      "answer": "PV",
+      "accept": [
+        "PV",
+        "pv"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "CPI = EV / ____。",
+      "answer": "AC",
+      "accept": [
+        "AC",
+        "ac"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "典型 EAC = BAC / ____。",
+      "answer": "CPI",
+      "accept": [
+        "CPI",
+        "cpi"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "ETC = EAC − ____。",
+      "answer": "AC",
+      "accept": [
+        "AC",
+        "ac"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "TCPI（按BAC）=(BAC−EV)/(BAC−____)。",
+      "answer": "AC",
+      "accept": [
+        "AC",
+        "ac"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "应急储备对应____-未知风险。",
+      "answer": "已知",
+      "accept": [
+        "已知"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "管理储备对应未知-____风险。",
+      "answer": "未知",
+      "accept": [
+        "未知"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "EV 又称____价值。",
+      "answer": "挣",
+      "accept": [
+        "挣",
+        "挣值"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "BAC 是____预算。",
+      "answer": "完工",
+      "accept": [
+        "完工",
+        "完成"
+      ],
+      "explain": ""
+    },
+    {
+      "q": "口诀：差用减，指数用____。",
+      "answer": "除",
+      "accept": [
+        "除"
+      ],
+      "explain": ""
     }
   ]
 }
