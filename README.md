@@ -46,7 +46,7 @@
 ```
 
    - `answer` 是正确选项在 `options` 中的下标（从 0 开始）；页面上会自动打乱选项顺序。
-   - 自测题须为**原创练习题**，不要标成真题。
+   - 题目标 `kind`：`原创练习题` 或 `真题/回忆版`（回忆版须注明年份来源，见 `data/SOURCES-真题.md`）。
 2. 在 `data/index.json` 中把该章的 `"ready"` 改为 `true`。
 3. `git add -A && git commit -m "Add ch04" && git push`。
 
